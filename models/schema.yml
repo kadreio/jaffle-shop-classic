@@ -28,7 +28,12 @@ models:
 
       - name: total_order_amount
         description: Total value (AUD) of a customer's orders
-
+    meta:
+      joins:
+        - join: orders
+          type: left
+          sql_on: ${customers.customer_id} = ${orders.customer_id}
+          fields: [number_of_orders, total_order_amount]
   - name: orders
     description: This table has basic information about orders, as well as some derived facts based on payments
 
